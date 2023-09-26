@@ -11,11 +11,11 @@ The sample application that leverages OpenAI requires you to establish an accoun
 
 The sample app that leverages GPT4all has no charges (it's free/open-source and downloadable to run locally), but it's also slower since you are likely running it on smaller hardware.  Go here for relevant details: http://gpt4all.io
 
-## Example usage:
+## Example usage (both demo apps work exactly the same, but use different LLM's):
 
 ```python demo-pgvector-openai.py
 This example application uses OpenAI API for LLM vector embeddings, and PostgreSQL PGvector extension for vector storage and query.
-Usage:  demo-pgvector-openai.py -add | -query | -qembed | -sql collection_name 'document_path_and_name'|'question, phrase, or text query'
+Usage:  demo-pgvector-openai.py -add | -query | -sql collection_name 'document_path_and_name'|'question, phrase, or text query'
  Examples:
   add one document:         demo-pgvector-openai.py -add my_collection 'State-of-the-Union-address.txt'
   run query:                demo-pgvector-openai.py -query my_collection 'What statements did the president make about inflation?'
