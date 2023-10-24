@@ -1,11 +1,11 @@
 import requests
 
-url = 'http://mrksolr1:8983/solr/sisktest1/select'
+url = 'http://solr1:8983/solr/sisktest1/select'
 
 #payload = {'q':'type:c'}  # Query Solr for type:c
 
 # q=*:*&sort=view_count desc&rows=1&fl=view_count
-#http://mrksolr1:8983/solr/sisktest1/select?fl=vid&q=vid:*&rows=1&sort=vid+desc
+#http://solr1:8983/solr/sisktest1/select?fl=vid&q=vid:*&rows=1&sort=vid+desc
 
 # When we do this via the fq (filter query), that result is cached before applying the q (query) part
 payload = {'fq':'type:c', 'q':'vid:*', 'sort':'vid desc', 'rows':'1', 'fl':'vid'}  # Query Solr for type:c and get max ID for that type
