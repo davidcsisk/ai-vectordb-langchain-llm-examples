@@ -6,8 +6,8 @@ import json
 #import pandas as pd
 from sentence_transformers import SentenceTransformer
 
-solr_query_url = 'http://mrksolr1.bos.bullhorn.com:8983/solr/soliant-jobs/query' 
-solr_update_url = 'http://mrksolr1.bos.bullhorn.com:8983/solr/soliant-jobs/update?commit=true'
+solr_query_url = 'http://solr1:8983/solr/collection1/query' 
+solr_update_url = 'http://solr1:8983/solr/collection1/update?commit=true'
 
 batch_size = 5
 start_num = 0
@@ -15,10 +15,6 @@ start_num = 0
 # Instantiate an instance of Bert large LLM...this model returns a 1024 dimension vector
 model = SentenceTransformer('sentence-transformers/stsb-bert-large')
 
-
-# Get 500 doc ID's
-# http://mrksolr1:8983/solr/soliant-jobs/select?fl=id&q=*%3A*&rows=500&sort=id%20asc
-# http://mrksolr1:8983/solr/soliant-jobs/select?fl=id&q=*%3A*&rows=500&sort=id%20asc&start=500
 
 # Set the content type to JSON
 headers = {'Content-type': 'application/json'}
