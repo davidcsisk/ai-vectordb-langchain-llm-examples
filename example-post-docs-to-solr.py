@@ -2,7 +2,7 @@ import requests
 import json
 
 # Define the Solr update URL
-solr_url = 'http://mrksolr1:8983/solr/sisk-test-1/update'
+solr_url = 'http://solr1:8983/solr/sisk-test-1/update'
 solr_url_with_commit = f'{solr_url}?commit=true'
 
 # Prepare your JSON-formatted data
