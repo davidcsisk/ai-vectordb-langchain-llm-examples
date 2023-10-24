@@ -1,6 +1,6 @@
 import requests
 
-url = 'http://mrksolr1:8983/solr/mrk-soliant-cand-jobs/query'
+url = 'http://solr1:8983/solr/collection1/query'
 
 payload = {'q':'type:c'}  # Query Solr for type:c
 
