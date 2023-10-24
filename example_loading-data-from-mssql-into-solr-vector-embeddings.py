@@ -1,18 +1,3 @@
-# This script does the following:
-# 1) Queries ATS to get a batch of job data and stores it in a dataframe
-# 2) Calls the candidate/job matching model API with the batch of rows
-# 3) Stores the vector embedding results from the API in a dataframe
-# 4) Outputs the final data as JSON posted to Solr
-
-# This calls our dev AzuleML endpoint with candidate or job data, and catches the vector data returned by the model
-#POST http://52.151.224.249:80/api/v1/service/futuresearch-embedding/score
-#inputdata = {"data": [{"id": 0, "text": "Financial Controller"}, 
-#          {"id": 1, "text": "Vice President of Personal Finance"}]}
-# The API call can accept up to 500 records per call.
-# Output is id, title, and 32 dimension vector embedding.
-
-# Job query:       select top 500 jobPostingID, title from bullhorn1.BH_JobOpportunity where title is not null order by 1;
-
 import requests
 import os, sys
 import json
@@ -22,12 +7,10 @@ import datetime
 
 
 # URL for the vector embedding API call
-model_url = 'http://52.151.224.249:80/api/v1/service/futuresearch-embedding/score'
+model_url = 'blahblahblah/score'
 
 # Solr POST url
-#solr_url = 'http://mrksolr1.bos.bullhorn.com:8983/solr/sisk-test-1/update'
-solr_url = 'http://mrksolr1.bos.bullhorn.com:8983/solr/soliant-jobs/update'
-#solr_url = 'http://devsolr1.dev.bullhorn.com:8983/solr/sisk-test-collection/update'
+solr_url = 'http://solr1:8983/solr/collection1/update'
 
 # For posting documents to Solr, set the content type to JSON
 solr_headers = {'Content-type': 'application/json'}
@@ -61,8 +44,8 @@ while row_count > 0:
     with open(last_id_file) as f:
         last_id = f.read()
 
-    job_query_sql = 'select top 500 jobPostingID id, title text from bullhorn1.BH_JobOpportunity \
-                     where title is not null and jobPostingID > ' + last_id + 'order by 1;'
+    job_query_sql = 'select top 500 id, title text from JobOpportunity \
+                     where title is not null and id > ' + last_id + 'order by 1;'
     df_jobdata = pd.read_sql(job_query_sql, engine_mssql)
     row_count = df_jobdata.shape[0]
     if row_count > 0:
