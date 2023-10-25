@@ -2,15 +2,13 @@ import requests
 
 url = 'http://solr1:8983/solr/collection1/query'
 
-#payload = {'key1': 'value1', 'key2': 'value2'}
-#r = requests.get("http://httpbin.org/get", params=payload)
+#Typical query dictionary:  payload = {'key1': 'value1', 'key2': 'value2'}
 
-# We're doing a KNN dense vector search
+# We're doing a KNN dense vector search (aka vector similarity search), so our payload looks a bit different than typical
 payload = {'q':'{!knn f=vector topK=10}[0.055002063512802124, 0.5700520873069763, 0.5669583082199097, 0.7437034845352173, 0.06055629253387451, 0.9729007482528687, 0.6201390624046326, 0.06868445873260498, 0.7781654596328735, 0.05993133783340454, 0.9376886487007141, 0.32838159799575806, 0.3944874405860901, 0.0008502304553985596, 0.1695578396320343, 0.9339065551757812, 0.9965566992759705, 0.5071656107902527, 0.9905120134353638, 0.7907150983810425, 0.035771459341049194, 0.5050079226493835, 0.9344719648361206, 0.9233564138412476, 0.4169458746910095, 0.6188828945159912, 0.6617739200592041, 0.5736827254295349, 0.48255276679992676, 0.3874031901359558, 0.029891252517700195, 0.9429755210876465]'}
 
 # Below would give us a KNN / dense vector similarity search (the q) pre-filtered first by a field (such as type:c or type:j)
 # payload = {'fq':'type:' + input_filter, 'q':'{!knn f=vector topK=10}' + str(vector_embedding) + ''} 
-
 
 r = requests.post(url, payload)
 

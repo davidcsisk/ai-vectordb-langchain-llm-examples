@@ -44,7 +44,7 @@ while row_count > 0:
     with open(last_id_file) as f:
         last_id = f.read()
 
-    job_query_sql = 'select top 500 id, title text from JobOpportunity \
+    job_query_sql = 'select top 500 id, title text from openjobs \
                      where title is not null and id > ' + last_id + 'order by 1;'
     df_jobdata = pd.read_sql(job_query_sql, engine_mssql)
     row_count = df_jobdata.shape[0]
