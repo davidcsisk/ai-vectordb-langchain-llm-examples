@@ -1,0 +1,34 @@
+# This docker container is useful if you are developing on Windows...pgvector extension is still experimental on the Windows platform
+#
+# This example gets the pgvector docker container, shows you how to run it, get a command line on the container,
+# create a database for Langchain to use, and add the vector extension to that database.
+# If you run this the way I've specified, you can then login to test like so:  psql -h localhost -U postgres usconstitution (password postgres)
+# You will need to set an environment variable for the demo app to use...it should look like this:
+# PGVECTOR_CONNECTION=postgresql+psycopg2://postgres:postgres@localhost:5433/usconstitution
+# You must of course first install docker on your laptop for any of this to work
+https://hub.docker.com/r/ankane/pgvector
+https://github.com/pgvector/pgvector
+
+
+docker pull ankane/pgvector
+docker images
+
+# First time.  Create the directory for docker to map the db storage to...this prevents data from getting lost if the docker container is removed.
+docker run --name pgvector -e POSTGRES_PASSWORD=postgres -d -p 5433:5432 -v C:\Users\david\OneDrive\Documents\AI_stuff\pgvector-docker-volume:/var/lib/postgresql/data ankane/pgvector
+
+# Every subsequent time
+docker start/stop pgvector
+
+# Get a commandline on the container
+docker exec -it pgvector /bin/bash
+su - postgres
+psql
+create database usconstitution;
+\q
+
+# Login to new DB and add the vector extension in the new DB
+psql usconstitution
+create extension vector;
+
+\dx
+\q
